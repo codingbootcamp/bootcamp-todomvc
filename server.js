@@ -27,5 +27,10 @@ app.route('/todos')
         return TodoController.createTodo(req, res);
     });
 
+app.route('/todos/:todoId')
+    .get(function(req, res) {
+        return TodoController.getTodo(req, res);
+    });
+
 app.listen(PORT);
 console.log(`Server started at port: ${PORT}`);
