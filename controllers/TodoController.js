@@ -11,6 +11,16 @@ module.exports = {
             res.json(todo);
         });
     },
+    updateTodo: function(req, res) {
+        const updated_todo = {
+            title: req.body.title,
+            is_complete: req.body.is_complete || false
+        };
+        TodoService.updateTodo(req.params.todoId, updated_todo)
+            .then(function(todo) {
+                res.json(todo);
+            });
+    },
     createTodo: function(req, res) {
         TodoService.createTodo(req.body)
         .then(function(todos) {

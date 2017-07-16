@@ -30,6 +30,9 @@ app.route('/todos')
 app.route('/todos/:todoId')
     .get(function(req, res) {
         return TodoController.getTodo(req, res);
+    })
+    .patch(function(req, res) {
+        return TodoController.updateTodo(req, res);
     });
 
 app.listen(PORT);
