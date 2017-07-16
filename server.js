@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8000;
 const app = express();
-const mongodbURI = 'mongodb://localhost/oversight';
+const mongodbURI = 'mongodb://localhost/bootcamptodomvc';
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // load model schema
 require('./models/todo');
@@ -16,9 +18,13 @@ mongoose.connect(mongodbURI, {
     useMongoClient: true,
 });
 
-app.route('/')
+app.route('/todos')
     .get(function(req, res) {
         return TodoController.getAllTodos(req, res);
+    })
+    .post(function(req, res) {
+        console.log(req);
+        return TodoController.createTodo(req, res);
     });
 
 app.listen(PORT);
