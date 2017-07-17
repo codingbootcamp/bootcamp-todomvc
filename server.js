@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8000;
@@ -9,6 +10,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(bodyParser.json());
+
+app.use(cors());
 // load model schema
 require('./models/todo');
 const TodoController = require('./controllers/TodoController');
@@ -23,7 +27,6 @@ app.route('/todos')
         return TodoController.getAllTodos(req, res);
     })
     .post(function(req, res) {
-        console.log(req);
         return TodoController.createTodo(req, res);
     });
 
@@ -33,6 +36,9 @@ app.route('/todos/:todoId')
     })
     .patch(function(req, res) {
         return TodoController.updateTodo(req, res);
+    })
+    .delete(function(req, res) {
+        return TodoController.deleteTodo(req, res);
     });
 
 app.listen(PORT);

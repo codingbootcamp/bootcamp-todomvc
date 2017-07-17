@@ -21,6 +21,15 @@ module.exports = {
                 res.json(todo);
             });
     },
+    deleteTodo: function(req, res) {
+        const todo_id = req.params.todoId;
+        TodoService.deleteTodo(todo_id)
+            .then(function(todo) {
+                res.json({
+                    'message': `Succesfully deleted todo with id : ${todo_id}`
+                });
+            });
+    },
     createTodo: function(req, res) {
         TodoService.createTodo(req.body)
         .then(function(todos) {

@@ -29,6 +29,10 @@ module.exports = {
                     return todo;
                 });
     },
+    deleteTodo: function(todo_id) {
+        return Todo.remove({_id: todo_id})
+                .then(() => {});
+    },
     createTodo: function(new_todo_from_request) {
         const new_todo = new Todo(new_todo_from_request);
         return new_todo.save()
