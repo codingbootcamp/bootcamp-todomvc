@@ -7,7 +7,7 @@ const app = express();
 let mongodbURI = 'mongodb://localhost/bootcamptodomvc';
 
 const env = process.env.NODE_ENV || 'development';
-
+console.log('PRINTING NODE ENV ===========> '+ env);
 if (env === 'prod') {
     mongodbURI = 'mongodb://root:123456@@ds121483.mlab.com:21483/bootcamptodoapp';
 }
