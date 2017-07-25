@@ -30,7 +30,7 @@ mongoose.connect(mongodbURI, {
 app.route('/')
     .get(function(req, res) {
         return res.json({
-            message: 'Welcome to todomvc api. Add /todos to view a list of saved todos.'
+            message: 'Welcome to todomvc api.'
         })
     });
 
