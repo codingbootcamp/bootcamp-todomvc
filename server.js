@@ -4,7 +4,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8000;
 const app = express();
-const mongodbURI = 'mongodb://localhost/bootcamptodomvc';
+let mongodbURI = 'mongodb://localhost/bootcamptodomvc';
+
+const env = process.env.NODE_ENV || 'development';
+
+if (env === 'prod') {
+    mongodbURI = 'mongodb://root:123456@@ds121483.mlab.com:21483/bootcamptodoapp';
+}
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -21,6 +27,13 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongodbURI, {
     useMongoClient: true,
 });
+
+app.route('/')
+    .get(function(req, res) {
+        return res.json({
+            message: 'Welcome to todomvc api. Add /todos to view a list of saved todos.'
+        })
+    });
 
 app.route('/todos')
     .get(function(req, res) {
